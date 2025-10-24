@@ -1,8 +1,12 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import axios from "axios";
+import type { NextAuthOptions } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+type ApiUser = { id: string; name?: string; email?: string };
+
+export const authOptions: NextAuthOptions = {
   providers: [
     Credentials({
       name: "Credentials",
@@ -42,23 +46,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       // attach user info to token
+      const t = token as JWT & { user?: { id: string; name?: string; email?: string } };
       if (user) {
-        token.user = {
-          id: user.id || user.id,
-          name: user.name,
-          email: user.email,
+        const u = user as unknown as ApiUser;
+        t.user = {
+          id: u.id,
+          name: u.name ?? "",
+          email: u.email ?? "",
         };
       }
-      return token;
+      return t as JWT;
     },
 
     async session({ session, token }) {
       // attach token info to session
-      if (token.user) {
+      const t = token as JWT & { user?: { id: string; name?: string; email?: string } };
+      if (t.user) {
         session.user = {
-          id: token.user.id,
-          name: token.user.name,
-          email: token.user.email,
+          id: t.user.id,
+          name: t.user.name ?? "",
+          email: t.user.email ?? "",
         };
       }
       return session;
@@ -66,4 +73,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+const handler = NextAuth(authOptions);
+
+export default handler;
+export { handler };
