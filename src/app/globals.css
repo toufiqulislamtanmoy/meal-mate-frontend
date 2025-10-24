@@ -3,6 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary:#0070f3;
+  --primary-content:#ffffff;
+  --primary-focus:#0000ff;
+  --secondary:#9f7aea;
+  --secondary-content:#ffffff;
+  --secondary-focus:#6366f1;
+  --accent:#ef4444;
+  --accent-content:#ffffff;
+  --accent-focus:#b91c1c;
+  --success:#22c55e;
+  --success-content:#ffffff;
+  --success-focus:#16a34a;
+  --warning:#fbbf24;
+  --warning-content:#ffffff;
+  --warning-focus:#f59e0b;
+  --error:#ef4444;
+  --error-content:#ffffff;
+  --error-focus:#b91c1c;
 }
 
 @theme inline {
@@ -10,6 +28,24 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-content: var(--primary-content);
+  --color-primary-focus: var(--primary-focus);
+  --color-secondary: var(--secondary);
+  --color-secondary-content: var(--secondary-content);
+  --color-secondary-focus: var(--secondary-focus);
+  --color-accent: var(--accent);
+  --color-accent-content: var(--accent-content);
+  --color-accent-focus: var(--accent-focus);
+  --color-success: var(--success);
+  --color-success-content: var(--success-content);
+  --color-success-focus: var(--success-focus);
+  --color-warning: var(--warning);
+  --color-warning-content: var(--warning-content);
+  --color-warning-focus: var(--warning-focus);
+  --color-error: var(--error);
+  --color-error-content: var(--error-content);
+  --color-error-focus: var(--error-focus);
 }
 
 @media (prefers-color-scheme: dark) {
