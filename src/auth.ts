@@ -4,7 +4,15 @@ import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 
-type ApiUser = { id: string; name?: string; email?: string };
+type ApiUser = {
+  data: {
+    _id: string;
+    name: string;
+    email: string;
+    role: string;
+    avatar: string;
+  };
+};
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,7 +26,6 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          // Call your Express backend login endpoint
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
             {
@@ -27,9 +34,9 @@ export const authOptions: NextAuthOptions = {
             }
           );
 
-          const user = res.data?.user;
+          const user = res?.data;
 
-          if (user) return user; // return user object if login success
+          if (user) return user;
           return null;
         } catch (err) {
           console.error("Login failed:", err);
@@ -46,13 +53,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       // attach user info to token
-      const t = token as JWT & { user?: { id: string; name?: string; email?: string } };
+      const t = token as JWT & {
+        user?: { id: string; name?: string; email?: string };
+      };
       if (user) {
         const u = user as unknown as ApiUser;
         t.user = {
-          id: u.id,
-          name: u.name ?? "",
-          email: u.email ?? "",
+          id: u.data._id,
+          name: u.data.name,
+          email: u.data.email,
         };
       }
       return t as JWT;
@@ -60,7 +69,9 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       // attach token info to session
-      const t = token as JWT & { user?: { id: string; name?: string; email?: string } };
+      const t = token as JWT & {
+        user?: { id: string; name?: string; email?: string };
+      };
       if (t.user) {
         session.user = {
           id: t.user.id,
