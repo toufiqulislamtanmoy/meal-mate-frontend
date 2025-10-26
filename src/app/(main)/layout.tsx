@@ -1,17 +1,24 @@
-import Navbar from "@/components/Navigation/Navbar";
+import type React from "react"
+import Navbar from "@/components/Navigation/Navbar"
 
-export const metadata = {
-  title: "Family Meal",
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Family Meal Mate",
   description: "Manage meals and expenses effortlessly",
-};
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className="bg-linear-to-b from-blue-50 to-white text-gray-800 min-h-screen">
+      <body className="bg-white text-gray-900 min-h-screen">
         <Navbar />
-        <main className="container mx-auto px-6 py-10">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
-  );
+  )
 }
