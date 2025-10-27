@@ -108,7 +108,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="px-5 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-medium rounded-lg hover:shadow-lg transition text-center"
+                  className="px-5 py-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white font-medium rounded-lg hover:shadow-lg transition text-center"
                 >
                   Sign Up
                 </Link>
