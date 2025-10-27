@@ -61,18 +61,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden flex-col justify-between p-12"
+        className="hidden lg:flex lg:w-1/2 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden flex-col justify-between p-12"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-lime-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-300 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-0 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-300 rounded-full blur-3xl"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg rounded-full flex items-center justify-center">
               <span className="text-xl font-bold text-slate-900">🍽️</span>
             </div>
             <span className="text-2xl font-bold text-white">Family Meal</span>
@@ -95,7 +95,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               <p className="text-slate-300">Already have an account?</p>
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 text-lime-400 font-semibold hover:text-lime-300 transition group"
+                className="inline-flex items-center gap-2 text-purple-400 font-semibold hover:text-purple-300 transition group"
               >
                 Login here
                 <span className="group-hover:translate-x-1 transition">→</span>
@@ -107,7 +107,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               <p className="text-slate-300">New to Family Meal?</p>
               <Link
                 href="/register"
-                className="inline-flex items-center gap-2 text-lime-400 font-semibold hover:text-lime-300 transition group"
+                className="inline-flex items-center gap-2 text-purple-400 font-semibold hover:text-purple-300 transition group"
               >
                 Create account
                 <span className="group-hover:translate-x-1 transition">→</span>
@@ -127,7 +127,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <div className="max-w-md w-full mx-auto">
           {/* Mobile Header */}
           <div className="lg:hidden mb-8 flex items-center gap-3">
-            <div className="w-10 h-10 bg-lime-400 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-purple-400 rounded-full flex items-center justify-center">
               <span className="text-lg font-bold text-slate-900">🍽️</span>
             </div>
             <span className="text-xl font-bold text-slate-900">Family Meal</span>
@@ -170,7 +170,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                   <input
                     type="checkbox"
                     onChange={(e) => onRememberMeChange?.(e.target.checked)}
-                    className="w-4 h-4 border-2 border-slate-300 rounded cursor-pointer accent-lime-400"
+                    className="w-4 h-4 border-2 border-slate-300 rounded cursor-pointer accent-purple-400"
                   />
                   <span className="text-sm text-slate-700 group-hover:text-slate-900">Remember me</span>
                 </label>
@@ -231,14 +231,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <div className="mt-8 pt-6 border-t border-slate-200 text-center">
             {linkBelowForm && (
               <p className="text-slate-600">
-                <Link href={linkBelowForm.href} className="text-lime-600 font-semibold hover:text-lime-700 transition">
+                <Link href={linkBelowForm.href} className="text-purple-600 font-semibold hover:text-purple-700 transition">
                   {linkBelowForm.text}
                 </Link>
               </p>
             )}
             {extraLink && (
               <p className="text-slate-600 mt-2">
-                <Link href={extraLink.href} className="text-lime-600 font-semibold hover:text-lime-700 transition">
+                <Link href={extraLink.href} className="text-purple-600 font-semibold hover:text-purple-700 transition">
                   {extraLink.text}
                 </Link>
               </p>

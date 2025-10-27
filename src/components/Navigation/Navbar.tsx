@@ -3,64 +3,120 @@
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
+import { Menu, X } from "lucide-react"
+import { useState } from "react"
 
 export default function Navbar() {
   const { data: session } = useSession()
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-gradient-to-r from-purple-600 to-indigo-500 shadow-lg">
-      <div className="container mx-auto flex items-center justify-between px-6 py-4 text-white">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+      <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold tracking-wide hover:text-gray-100 transition">
-          Family Meal
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">🍽</span>
+          </div>
+          <span className="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition">Family Meal</span>
         </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-8">
-          <li>
-            <Link href="/" className="hover:text-gray-200 transition font-medium">
-              Home
-            </Link>
-          </li>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          <Link href="/" className="text-gray-600 hover:text-purple-600 font-medium transition">
+            Home
+          </Link>
 
           {/* Auth Section */}
           {session?.user ? (
-            <li className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-gray-50 border border-gray-200">
                 <Image
                   src={session?.user?.image || "/images/avatar.png"}
                   alt="profile"
-                  width={40}
-                  height={40}
-                  className="rounded-full border-2 border-white"
+                  width={32}
+                  height={32}
+                  className="rounded-full"
                 />
-                <span className="text-sm font-medium">{session?.user?.name}</span>
+                <span className="text-sm font-medium text-gray-700">{session?.user?.name}</span>
               </div>
               <button
                 onClick={() => signOut()}
-                className="px-5 py-2 rounded-full bg-white text-purple-600 font-semibold hover:bg-gray-100 transition"
+                className="px-5 py-2 text-gray-600 hover:text-gray-900 font-medium transition border border-gray-200 rounded-lg hover:bg-gray-50"
               >
                 Logout
               </button>
-            </li>
+            </div>
           ) : (
-            <li className="flex items-center gap-3">
-              <Link
-                href="/login"
-                className="px-5 py-2 rounded-full bg-white text-purple-600 font-semibold hover:bg-gray-100 transition"
-              >
+            <div className="flex items-center gap-3">
+              <Link href="/login" className="px-5 py-2 text-gray-600 hover:text-purple-600 font-medium transition">
                 Login
               </Link>
               <Link
                 href="/register"
-                className="px-5 py-2 rounded-full border-2 border-white font-semibold hover:bg-white hover:text-purple-600 transition"
+                className="px-5 py-2 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition"
               >
-                Register
+                Sign Up
               </Link>
-            </li>
+            </div>
           )}
-        </ul>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-gray-900 hover:text-emerald-600 transition"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden border-t border-gray-100 bg-gray-50">
+          <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+            <Link href="/" className="text-gray-600 hover:text-emerald-600 font-medium transition">
+              Home
+            </Link>
+
+            {session?.user ? (
+              <>
+                <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-white border border-gray-200">
+                  <Image
+                    src={session?.user?.image || "/images/avatar.png"}
+                    alt="profile"
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
+                  <span className="text-sm font-medium text-gray-700">{session?.user?.name}</span>
+                </div>
+                <button
+                  onClick={() => signOut()}
+                  className="px-5 py-2 text-gray-600 hover:text-gray-900 font-medium transition border border-gray-200 rounded-lg hover:bg-white"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="px-5 py-2 text-gray-600 hover:text-gray-900 font-medium transition text-center"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="px-5 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-medium rounded-lg hover:shadow-lg transition text-center"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
