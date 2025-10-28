@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-linear-to-r from-white to-gray-50">
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -15,7 +15,7 @@ export default function Home() {
               <div className="space-y-4">
                 <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 leading-tight">
                   Plan Meals,
-                  <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                     {" "}
                     Save Money
                   </span>
@@ -30,7 +30,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Link
                   href="/login"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
                 >
                   Get Started
                   <ArrowRight className="ml-2" size={20} />
@@ -58,9 +58,9 @@ export default function Home() {
 
             {/* Right Image */}
             <div className="relative hidden lg:block">
-              <div className="bg-gradient-to-br from-purple-100 to-indigo-100 rounded-2xl p-8 aspect-square flex items-center justify-center">
+              <div className="bg-linear-to-rr from-purple-100 to-indigo-100 rounded-2xl p-8 aspect-square flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full">
                     <span className="text-4xl">🍽️</span>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">Family Meal Mate</h3>
@@ -82,8 +82,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Feature 1 */}
-            <div className="p-8 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
+            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Users size={24} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Family Coordination</h3>
@@ -91,8 +91,8 @@ export default function Home() {
             </div>
 
             {/* Feature 2 */}
-            <div className="p-8 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
+            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Calculator size={24} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Smart Calculator</h3>
@@ -102,8 +102,8 @@ export default function Home() {
             </div>
 
             {/* Feature 3 */}
-            <div className="p-8 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
+            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Clock size={24} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Weekly Planning</h3>
@@ -113,8 +113,8 @@ export default function Home() {
             </div>
 
             {/* Feature 4 */}
-            <div className="p-8 rounded-xl bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
+            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <TrendingDown size={24} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Budget Tracking</h3>
@@ -127,7 +127,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-12 text-center text-white">
+          <div className="bg-linear-to-r from-purple-600 to-indigo-600 rounded-2xl p-12 text-center text-white">
             <h2 className="text-4xl font-bold mb-4">Ready to Simplify Meal Planning?</h2>
             <p className="text-lg text-purple-100 mb-8">
               Join hundreds of families already saving time and money with Family Meal Mate
