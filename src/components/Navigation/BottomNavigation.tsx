@@ -1,5 +1,5 @@
 "use client";
-import { Settings, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CgMenu } from "react-icons/cg";

@@ -38,7 +38,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   buttonText,
   disabled,
   errorMessage,
-  extraLink,
   heroTitle,
   heroSubtitle,
   onRememberMeChange,
@@ -205,7 +204,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
             </motion.button>
           </form>
 
-          {/* Divider */} 
+          {/* Divider */}
           {isLogin && (
             <>
               <div className="flex items-center gap-4 my-6">
