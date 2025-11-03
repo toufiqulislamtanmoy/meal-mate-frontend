@@ -1,7 +1,13 @@
-"use client"
+"use client";
 
-import { ArrowRight, Users, Calculator, Clock, TrendingDown } from "lucide-react"
-import Link from "next/link"
+import {
+  ArrowRight,
+  Users,
+  Calculator,
+  Clock,
+  TrendingDown,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,8 +27,9 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
-                  Organize family dinners, calculate meal costs, and manage expenses effortlessly. Family Meal Mate
-                  makes meal planning simple and affordable.
+                  Organize family dinners, calculate meal costs, and manage
+                  expenses effortlessly. Family Meal Mate makes meal planning
+                  simple and affordable.
                 </p>
               </div>
 
@@ -63,8 +70,12 @@ export default function Home() {
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full">
                     <span className="text-4xl">🍽️</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Family Meal Mate</h3>
-                  <p className="text-gray-600">Smart Meal Planning & Expense Calculator</p>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Family Meal Mate
+                  </h3>
+                  <p className="text-gray-600">
+                    Smart Meal Planning & Expense Calculator
+                  </p>
                 </div>
               </div>
             </div>
@@ -76,8 +87,12 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Family Meal Mate?</h2>
-            <p className="text-xl text-gray-600">Everything you need to manage family meals and expenses</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Family Meal Mate?
+            </h2>
+            <p className="text-xl text-gray-600">
+              Everything you need to manage family meals and expenses
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -86,8 +101,13 @@ export default function Home() {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Users size={24} className="text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Family Coordination</h3>
-              <p className="text-gray-600">Invite family members and coordinate meal planning together in real-time</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Family Coordination
+              </h3>
+              <p className="text-gray-600">
+                Invite family members and coordinate meal planning together in
+                real-time
+              </p>
             </div>
 
             {/* Feature 2 */}
@@ -95,9 +115,12 @@ export default function Home() {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Calculator size={24} className="text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Smart Calculator</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Smart Calculator
+              </h3>
               <p className="text-gray-600">
-                Automatically calculate meal costs and split expenses fairly among family members
+                Automatically calculate meal costs and split expenses fairly
+                among family members
               </p>
             </div>
 
@@ -106,9 +129,12 @@ export default function Home() {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <Clock size={24} className="text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Weekly Planning</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Weekly Planning
+              </h3>
               <p className="text-gray-600">
-                Plan your meals week by week and stay organized with our intuitive calendar
+                Plan your meals week by week and stay organized with our
+                intuitive calendar
               </p>
             </div>
 
@@ -117,8 +143,13 @@ export default function Home() {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
                 <TrendingDown size={24} className="text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Budget Tracking</h3>
-              <p className="text-gray-600">Track spending patterns and get insights to reduce your meal expenses</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Budget Tracking
+              </h3>
+              <p className="text-gray-600">
+                Track spending patterns and get insights to reduce your meal
+                expenses
+              </p>
             </div>
           </div>
         </div>
@@ -128,9 +159,12 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-linear-to-r from-purple-600 to-indigo-600 rounded-2xl p-12 text-center text-white">
-            <h2 className="text-4xl font-bold mb-4">Ready to Simplify Meal Planning?</h2>
+            <h2 className="text-4xl font-bold mb-4">
+              Ready to Simplify Meal Planning?
+            </h2>
             <p className="text-lg text-purple-100 mb-8">
-              Join hundreds of families already saving time and money with Family Meal Mate
+              Join hundreds of families already saving time and money with
+              Family Meal Mate
             </p>
             <Link
               href="/register"
@@ -142,81 +176,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-white font-semibold mb-4">Family Meal Mate</h3>
-              <p className="text-sm">Smart meal planning and expense calculator for families</p>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Security
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition">
-                    Cookies
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-sm">
-            <p>&copy; 2025 Family Meal Mate. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
-  )
+  );
 }

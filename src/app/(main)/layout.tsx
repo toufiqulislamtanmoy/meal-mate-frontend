@@ -2,6 +2,7 @@ import type React from "react"
 import Navbar from "@/components/Navigation/Navbar"
 
 import type { Metadata } from "next"
+import BottomNavigation from "@/components/Navigation/BottomNavigation"
 
 export const metadata: Metadata = {
   title: "Family Meal Mate",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 min-h-screen">
         <Navbar />
         <main>{children}</main>
+        <BottomNavigation/>
       </body>
     </html>
   )
