@@ -1,181 +1,295 @@
-"use client";
+"use client"
+import { useState } from "react";
+import { Plus, Search, MoreHorizontal, Users, Clock, User } from "lucide-react";
+import Image from "next/image";
 
-import {
-  ArrowRight,
-  Users,
-  Calculator,
-  Clock,
-  TrendingDown,
-} from "lucide-react";
-import Link from "next/link";
+interface FamilyGroup {
+  id: string;
+  name: string;
+  image?: string;
+  members: number;
+  lastUpdated: string;
+  updatedBy: string;
+  updatedByImage?: string;
+  lastCalculation: string;
+  totalMeals: number;
+}
 
-export default function Home() {
+const FamilyList = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+
+  const familyGroups: FamilyGroup[] = [
+    {
+      id: "1",
+      name: "Smith Family",
+      image: "https://img.freepik.com/free-photo/close-up-hand-with-meal-plan_23-2148484654.jpg?semt=ais_hybrid&w=740&q=80",
+      members: 4,
+      lastUpdated: "2 min ago",
+      updatedBy: "John Smith",
+      updatedByImage: "/user1.jpg",
+      lastCalculation: "Dinner: $45.20",
+      totalMeals: 42,
+    },
+    {
+      id: "2",
+      name: "Weekend Cookouts",
+      image: "https://img.freepik.com/free-photo/close-up-hand-with-meal-plan_23-2148484654.jpg?semt=ais_hybrid&w=740&q=80",
+      members: 8,
+      lastUpdated: "1 hour ago",
+      updatedBy: "Sarah Johnson",
+      updatedByImage: "/user2.jpg",
+      lastCalculation: "BBQ: $120.75",
+      totalMeals: 18,
+    },
+    {
+      id: "3",
+      name: "Healthy Recipes",
+      image: "https://img.freepik.com/free-photo/close-up-hand-with-meal-plan_23-2148484654.jpg?semt=ais_hybrid&w=740&q=80",
+      members: 6,
+      lastUpdated: "3 hours ago",
+      updatedBy: "Mike Chen",
+      updatedByImage: "/user3.jpg",
+      lastCalculation: "Salad: $28.50",
+      totalMeals: 35,
+    },
+    {
+      id: "4",
+      name: "Holiday Meals",
+      image: "https://img.freepik.com/free-photo/close-up-hand-with-meal-plan_23-2148484654.jpg?semt=ais_hybrid&w=740&q=80",
+      members: 12,
+      lastUpdated: "1 day ago",
+      updatedBy: "Emily Davis",
+      updatedByImage: "/user4.jpg",
+      lastCalculation: "Christmas: $340.00",
+      totalMeals: 8,
+    },
+    {
+      id: "5",
+      name: "Quick Dinner Club",
+      image: "https://img.freepik.com/free-photo/close-up-hand-with-meal-plan_23-2148484654.jpg?semt=ais_hybrid&w=740&q=80",
+      members: 5,
+      lastUpdated: "2 days ago",
+      updatedBy: "Alex Brown",
+      updatedByImage: "/user5.jpg",
+      lastCalculation: "Pasta: $35.80",
+      totalMeals: 27,
+    },
+  ];
+
+  const filteredGroups = familyGroups.filter((group) =>
+    group.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-linear-to-r from-white to-gray-50">
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 leading-tight">
-                  Plan Meals,
-                  <span className="bg-linear-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-                    {" "}
-                    Save Money
-                  </span>
-                </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Organize family dinners, calculate meal costs, and manage
-                  expenses effortlessly. Family Meal Mate makes meal planning
-                  simple and affordable.
-                </p>
-              </div>
+    <div className="flex h-screen bg-background">
+      {/* Sidebar - Family List */}
+      <div className="w-full md:w-96 bg-white border-r border-gray-200 flex flex-col">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200 bg-white">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-bold text-foreground">Family Groups</h1>
+            <button className="p-2 bg-primary text-primary-content rounded-full hover:bg-primary-focus transition">
+              <Plus size={20} />
+            </button>
+          </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link
-                  href="/login"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-linear-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2" size={20} />
-                </Link>
-                <Link
-                  href="/register"
-                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:border-purple-600 hover:text-purple-600 transition-all duration-300"
-                >
-                  Create Account
-                </Link>
-              </div>
+          {/* Search Bar */}
+          <div className="relative">
+            <Search
+              size={18}
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            />
+            <input
+              type="text"
+              placeholder="Search families..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+        </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-6 pt-8">
-                <div>
-                  <p className="text-3xl font-bold text-gray-900">500+</p>
-                  <p className="text-gray-600">Families Planning</p>
+        {/* Family List */}
+        <div className="flex-1 overflow-y-auto">
+          {filteredGroups.map((group) => (
+            <div
+              key={group.id}
+              className={`border-b border-gray-100 p-4 cursor-pointer transition ${
+                selectedGroup === group.id
+                  ? "bg-primary/5 bg-opacity-5 border-l-4 border-l-primary"
+                  : "hover:bg-gray-50"
+              }`}
+              onClick={() => setSelectedGroup(group.id)}
+            >
+              <div className="flex items-start gap-3">
+                {/* Family Thumb */}
+                <div className="shrink-0">
+                  {group.image ? (
+                    <Image
+                      src={group.image}
+                      alt={group.name}
+                      height={200}
+                      width={200}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 bg-linear-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                      <Users size={20} className="text-primary-content" />
+                    </div>
+                  )}
                 </div>
-                <div>
-                  <p className="text-3xl font-bold text-gray-900">$2M+</p>
-                  <p className="text-gray-600">Saved Together</p>
+
+                {/* Family Info */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-semibold text-foreground truncate">
+                      {group.name}
+                    </h3>
+                    <span className="text-xs text-gray-500 whitespace-nowrap flex items-center gap-1">
+                      <Clock size={12} />
+                      {group.lastUpdated}
+                    </span>
+                  </div>
+
+                  {/* Last Calculation */}
+                  <p className="text-sm text-gray-600 mb-2 truncate">
+                    {group.lastCalculation}
+                  </p>
+
+                  {/* Updated By */}
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      {group.updatedByImage ? (
+                        <Image
+                          height={200}
+                          width={200}
+                          src={group.updatedByImage}
+                          alt={group.updatedBy}
+                          className="w-4 h-4 rounded-full"
+                        />
+                      ) : (
+                        <User size={12} className="text-gray-400" />
+                      )}
+                      <span className="text-xs text-gray-500">
+                        by {group.updatedBy}
+                      </span>
+                    </div>
+                    <span className="text-xs text-gray-400">•</span>
+                    <div className="flex items-center gap-1">
+                      <Users size={12} className="text-gray-400" />
+                      <span className="text-xs text-gray-500">
+                        {group.members} members
+                      </span>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Options button */}
+                <button className="p-1 text-gray-400 hover:text-foreground rounded transition">
+                  <MoreHorizontal size={16} />
+                </button>
               </div>
             </div>
+          ))}
+        </div>
+      </div>
 
-            {/* Right Image */}
-            <div className="relative hidden lg:block">
-              <div className="bg-linear-to-rr from-purple-100 to-indigo-100 rounded-2xl p-8 aspect-square flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-linear-to-r from-purple-600 to-indigo-600 rounded-full">
-                    <span className="text-4xl">🍽️</span>
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col">
+        {selectedGroup ? (
+          <>
+            {/* Family Header */}
+            <div className="border-b border-gray-200 bg-white p-4">
+              <div className="flex items-center gap-4">
+                {familyGroups.find((g) => g.id === selectedGroup)?.image ? (
+                  <Image
+                    src={
+                      familyGroups.find((g) => g.id === selectedGroup)?.image || ""
+                    }
+                    alt={familyGroups.find((g) => g.id === selectedGroup)?.name || ""}
+                    height={200}
+                    width={200}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-12 h-12 bg-linear-to-r from-primary to-secondary rounded-full flex items-center justify-center">
+                    <Users size={24} className="text-primary-content" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    Family Meal Mate
-                  </h3>
-                  <p className="text-gray-600">
-                    Smart Meal Planning & Expense Calculator
+                )}
+                <div>
+                  <h2 className="text-xl font-bold text-foreground">
+                    {familyGroups.find((g) => g.id === selectedGroup)?.name}
+                  </h2>
+                  <p className="text-sm text-gray-600 flex items-center gap-2">
+                    <Users size={14} />
+                    {
+                      familyGroups.find((g) => g.id === selectedGroup)?.members
+                    }{" "}
+                    family members
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Family Meal Mate?
-            </h2>
-            <p className="text-xl text-gray-600">
-              Everything you need to manage family meals and expenses
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Feature 1 */}
-            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
-                <Users size={24} className="text-white" />
+            {/* Meal Calculations Content */}
+            <div className="flex-1 bg-gray-50 p-6">
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-white rounded-lg border border-gray-200 p-6">
+                  <div className="text-center py-8">
+                    <div className="w-20 h-20 bg-linear-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Users size={32} className="text-primary-content" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      {familyGroups.find((g) => g.id === selectedGroup)?.name}{" "}
+                      Meal Calculations
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Total meals:{" "}
+                      {
+                        familyGroups.find((g) => g.id === selectedGroup)
+                          ?.totalMeals
+                      }
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Last updated:{" "}
+                      {
+                        familyGroups.find((g) => g.id === selectedGroup)
+                          ?.lastUpdated
+                      }{" "}
+                      by{" "}
+                      {
+                        familyGroups.find((g) => g.id === selectedGroup)
+                          ?.updatedBy
+                      }
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Family Coordination
-              </h3>
-              <p className="text-gray-600">
-                Invite family members and coordinate meal planning together in
-                real-time
-              </p>
             </div>
-
-            {/* Feature 2 */}
-            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
-                <Calculator size={24} className="text-white" />
+          </>
+        ) : (
+          /* Empty State */
+          <div className="flex-1 flex items-center justify-center bg-gray-50">
+            <div className="text-center">
+              <div className="w-24 h-24 bg-linear-to-r from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users size={32} className="text-primary-content" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Smart Calculator
-              </h3>
-              <p className="text-gray-600">
-                Automatically calculate meal costs and split expenses fairly
-                among family members
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                Select a Family
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Choose a family group to view meal calculations and expenses
               </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
-                <Clock size={24} className="text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Weekly Planning
-              </h3>
-              <p className="text-gray-600">
-                Plan your meals week by week and stay organized with our
-                intuitive calendar
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="p-8 rounded-xl bg-linear-to-rr from-purple-50 to-indigo-50 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg mb-4">
-                <TrendingDown size={24} className="text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                Budget Tracking
-              </h3>
-              <p className="text-gray-600">
-                Track spending patterns and get insights to reduce your meal
-                expenses
-              </p>
+              <button className="bg-primary text-primary-content px-6 py-3 rounded-lg hover:bg-primary-focus transition">
+                Create New Family
+              </button>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-linear-to-r from-purple-600 to-indigo-600 rounded-2xl p-12 text-center text-white">
-            <h2 className="text-4xl font-bold mb-4">
-              Ready to Simplify Meal Planning?
-            </h2>
-            <p className="text-lg text-purple-100 mb-8">
-              Join hundreds of families already saving time and money with
-              Family Meal Mate
-            </p>
-            <Link
-              href="/register"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300"
-            >
-              Start Free Today
-              <ArrowRight className="ml-2" size={20} />
-            </Link>
-          </div>
-        </div>
-      </section>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default FamilyList;
