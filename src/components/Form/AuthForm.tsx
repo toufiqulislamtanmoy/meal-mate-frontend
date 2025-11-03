@@ -257,16 +257,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 </Link>
               </p>
             )}
-            {extraLink && (
-              <p className="text-slate-600 mt-2">
-                <Link
-                  href={extraLink.href}
-                  className="text-purple-600 font-semibold hover:text-purple-700 transition"
-                >
-                  {extraLink.text}
-                </Link>
-              </p>
-            )}
           </div>
         </div>
       </motion.div>
