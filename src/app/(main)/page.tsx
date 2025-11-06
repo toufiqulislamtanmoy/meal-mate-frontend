@@ -121,11 +121,11 @@ const FamilyDashboard: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex h-screen bg-linear-to-br from-gray-50 to-gray-100">
       {/* LEFT SIDEBAR - Glass morphism */}
       <div className="w-80 bg-white/80 backdrop-blur-xl border-r border-gray-200/60 flex flex-col shadow-xl">
         <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-gray-200/60 p-6">
-          <h2 className="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+          <h2 className="text-xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
             Families
           </h2>
         </div>
@@ -137,8 +137,8 @@ const FamilyDashboard: React.FC = () => {
               onClick={() => setSelectedFamily(fam)}
               className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 group ${
                 selectedFamily.family_name === fam.family_name
-                  ? "bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg shadow-blue-500/25 transform scale-105"
-                  : "bg-white/60 hover:bg-white/80 hover:shadow-lg border border-white/50"
+                  ? "bg-linear-to-r from-primary to-primary-focus shadow-lg shadow-primary/25 transform scale-105"
+                  : "bg-white/60 hover:bg-white/80 border border-white/50"
               }`}
             >
               <div className="relative">
@@ -180,7 +180,7 @@ const FamilyDashboard: React.FC = () => {
 
           {/* Add Family Button */}
           <button className="w-full p-4 rounded-2xl border-2 border-dashed border-gray-300/60 hover:border-blue-400/60 hover:bg-blue-50/30 transition-all duration-300 group">
-            <div className="flex items-center justify-center gap-2 text-gray-500 group-hover:text-blue-600">
+            <div className="flex items-center justify-center gap-2 text-gray-500 group-hover:text-primary-focus">
               <div className="w-8 h-8 rounded-full bg-gray-200 group-hover:bg-blue-100 flex items-center justify-center">
                 <span className="text-lg font-semibold">+</span>
               </div>
@@ -196,7 +196,7 @@ const FamilyDashboard: React.FC = () => {
         <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-gray-200/60 shadow-sm">
           <div className="flex justify-between items-center p-6">
             <div>
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent capitalize">
+              <h2 className="text-2xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent capitalize">
                 {selectedFamily.family_name.replace("_", " ")}
               </h2>
               <p className="text-sm text-gray-500 mt-1">
@@ -207,7 +207,7 @@ const FamilyDashboard: React.FC = () => {
               <p className="text-sm text-gray-500 font-medium">
                 Available Balance
               </p>
-              <p className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <p className="text-3xl font-bold bg-linear-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 {formatCurrency(12500)}
               </p>
             </div>
@@ -215,12 +215,12 @@ const FamilyDashboard: React.FC = () => {
 
           {/* FILTERS */}
           <div className="px-6 pb-4 flex items-center gap-3">
-            <select className="border border-gray-300/60 rounded-xl px-4 py-2.5 text-sm bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all">
+            <select className="border border-gray-300/60 rounded-xl px-4 py-2.5 text-sm bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
               <option>October 2025</option>
               <option>September 2025</option>
               <option>August 2025</option>
             </select>
-            <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all">
+            <button className="bg-linear-to-r from-primary to-primary-focus text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-primary/25 transform hover:scale-105 transition-all">
               Apply Filter
             </button>
           </div>
@@ -242,7 +242,7 @@ const FamilyDashboard: React.FC = () => {
                 }
                 className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                   activeTab === tab.key
-                    ? "bg-white shadow-lg text-blue-600"
+                    ? "bg-white shadow-lg text-primary-focus"
                     : "text-gray-600 hover:text-gray-800"
                 }`}
               >
@@ -261,7 +261,7 @@ const FamilyDashboard: React.FC = () => {
                   <h3 className="text-lg font-semibold text-gray-800">
                     Recent Expenses
                   </h3>
-                  <button className="bg-gradient-to-r from-red-500 to-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-red-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
+                  <button className="bg-linear-to-r from-red-500 to-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-red-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
                     <span>+</span>
                     Add Expense
                   </button>
@@ -271,7 +271,7 @@ const FamilyDashboard: React.FC = () => {
                   {dummyExpenses.map((exp) => (
                     <div
                       key={exp.id}
-                      className="group p-5 bg-white rounded-2xl shadow-sm hover:shadow-lg border border-gray-100 hover:border-red-100 transition-all duration-300 hover:transform hover:-translate-y-0.5"
+                      className="group p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-red-100 transition-all duration-300 hover:transform hover:-translate-y-0.5"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex items-start gap-4">
@@ -312,7 +312,7 @@ const FamilyDashboard: React.FC = () => {
                   <h3 className="text-lg font-semibold text-gray-800">
                     Recent Deposits
                   </h3>
-                  <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-green-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
+                  <button className="bg-linear-to-r from-green-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-green-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
                     <span>+</span>
                     Add Deposit
                   </button>
@@ -322,7 +322,7 @@ const FamilyDashboard: React.FC = () => {
                   {dummyDeposits.map((dep) => (
                     <div
                       key={dep.id}
-                      className="group p-5 bg-white rounded-2xl shadow-sm hover:shadow-lg border border-gray-100 hover:border-green-100 transition-all duration-300 hover:transform hover:-translate-y-0.5"
+                      className="group p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-green-100 transition-all duration-300 hover:transform hover:-translate-y-0.5"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex items-start gap-4">
@@ -361,7 +361,7 @@ const FamilyDashboard: React.FC = () => {
               <div className="space-y-6 animate-fadeIn">
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                  <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
                         <span className="text-green-600 text-xl">📈</span>
@@ -377,7 +377,7 @@ const FamilyDashboard: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 border border-red-100">
+                  <div className="bg-linear-to-br from-red-50 to-orange-50 rounded-2xl p-6 border border-red-100">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
                         <span className="text-red-600 text-xl">📉</span>
@@ -393,10 +393,10 @@ const FamilyDashboard: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
+                  <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <span className="text-blue-600 text-xl">⚖️</span>
+                        <span className="text-primary-focus text-xl">⚖️</span>
                       </div>
                       <div>
                         <p className="text-sm text-gray-600 font-medium">
