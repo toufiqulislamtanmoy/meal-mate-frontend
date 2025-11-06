@@ -1,34 +1,11 @@
 "use client";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { MdAttachMoney } from "react-icons/md";
+import FamilyListSidebar from "@/components/FamilyList/FamilyListSidebar";
 import Image from "next/image";
 import { useState } from "react";
-
-// TYPES
-interface LastUpdate {
-  user_name: string;
-  date_time: string;
-}
-
-interface Family {
-  family_name: string;
-  image: string;
-  lastupdate: LastUpdate;
-}
-
-interface Expense {
-  id: number;
-  item: string;
-  by: string;
-  remainingBalance: number;
-  amount: number;
-}
-
-interface Deposit {
-  id: number;
-  item: string;
-  by: string;
-  newBalance: number;
-  amount: number;
-}
+import { Family, Expense, Deposit } from "@/types/family";
+import { GiPayMoney, GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
 
 // MAIN COMPONENT
 const FamilyDashboard: React.FC = () => {
@@ -54,6 +31,8 @@ const FamilyDashboard: React.FC = () => {
   ];
 
   const [families] = useState<Family[]>(dummyFamilies);
+  const [showBalance, setShowBalance] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   const [selectedFamily, setSelectedFamily] = useState<Family>(
     dummyFamilies[0]
   );
@@ -122,134 +101,94 @@ const FamilyDashboard: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-linear-to-br from-gray-50 to-gray-100">
-      {/* LEFT SIDEBAR - Glass morphism */}
-      <div className="w-80 bg-white/80 backdrop-blur-xl border-r border-gray-200/60 flex flex-col shadow-xl">
-        <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-gray-200/60 p-6">
-          <h2 className="text-xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-            Families
-          </h2>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          {families.map((fam) => (
-            <div
-              key={fam.family_name}
-              onClick={() => setSelectedFamily(fam)}
-              className={`flex items-center gap-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 group ${
-                selectedFamily.family_name === fam.family_name
-                  ? "bg-linear-to-r from-primary to-primary-focus shadow-lg shadow-primary/25 transform scale-105"
-                  : "bg-white/60 hover:bg-white/80 border border-white/50"
-              }`}
-            >
-              <div className="relative">
-                <Image
-                  height={200}
-                  width={200}
-                  src={
-                    "https://play-lh.googleusercontent.com/KwnZCqgVraZy2T3eEnYHrHVRYNMOaA6-g2VbyHHJfxBx2wvF4InQBikgsa0Dp-Bnj-rD"
-                  }
-                  alt={fam.family_name}
-                  className="w-12 h-12 rounded-2xl object-cover shadow-md"
-                />
-                {selectedFamily.family_name === fam.family_name && (
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></div>
-                )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p
-                  className={`font-semibold capitalize truncate ${
-                    selectedFamily.family_name === fam.family_name
-                      ? "text-white"
-                      : "text-gray-800"
-                  }`}
-                >
-                  {fam.family_name.replace("_", " ")}
-                </p>
-                <p
-                  className={`text-sm truncate ${
-                    selectedFamily.family_name === fam.family_name
-                      ? "text-blue-100"
-                      : "text-gray-500"
-                  }`}
-                >
-                  {fam.lastupdate.user_name}
-                </p>
-              </div>
-            </div>
-          ))}
-
-          {/* Add Family Button */}
-          <button className="w-full p-4 rounded-2xl border-2 border-dashed border-gray-300/60 hover:border-blue-400/60 hover:bg-blue-50/30 transition-all duration-300 group">
-            <div className="flex items-center justify-center gap-2 text-gray-500 group-hover:text-primary-focus">
-              <div className="w-8 h-8 rounded-full bg-gray-200 group-hover:bg-blue-100 flex items-center justify-center">
-                <span className="text-lg font-semibold">+</span>
-              </div>
-              <span className="font-medium">Add Family</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
+      <FamilyListSidebar
+        families={families}
+        selectedFamily={selectedFamily}
+        setSelectedFamily={setSelectedFamily}
+      />
       {/* MAIN CONTENT */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Sticky Header */}
-        <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-gray-200/60 shadow-sm">
-          <div className="flex justify-between items-center p-6">
-            <div>
-              <h2 className="text-2xl font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent capitalize">
-                {selectedFamily.family_name.replace("_", " ")}
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">
-                Last updated by {selectedFamily.lastupdate.user_name}
-              </p>
+        <div className="sticky bg-primary/5 top-0 z-20 backdrop-blur-xl border-b border-gray-200/60 shadow-sm">
+          <div className="flex justify-between items-center px-6 py-2">
+            <div className="flex items-center gap-1">
+              <Image
+                src={selectedFamily?.image}
+                width={200}
+                height={200}
+                alt="profile"
+                className="w-10 h-10 rounded-full"
+              />
+              <div>
+                <h2 className=" font-bold bg-linear-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent capitalize">
+                  {selectedFamily.family_name.replace("_", " ")}
+                </h2>
+                <p className="text-xs text-gray-500">
+                  Last updated by {selectedFamily.lastupdate.user_name}
+                </p>
+              </div>
             </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-500 font-medium">
-                Available Balance
-              </p>
-              <p className="text-3xl font-bold bg-linear-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                {formatCurrency(12500)}
-              </p>
-            </div>
-          </div>
 
-          {/* FILTERS */}
-          <div className="px-6 pb-4 flex items-center gap-3">
-            <select className="border border-gray-300/60 rounded-xl px-4 py-2.5 text-sm bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-              <option>October 2025</option>
-              <option>September 2025</option>
-              <option>August 2025</option>
-            </select>
-            <button className="bg-linear-to-r from-primary to-primary-focus text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-primary/25 transform hover:scale-105 transition-all">
-              Apply Filter
+            <button
+              onClick={() => {
+                setIsLoading(true);
+                setTimeout(() => {
+                  setShowBalance(!showBalance);
+                  setIsLoading(false);
+                }, 2000);
+              }}
+              className="text-right bg-primary p-3 rounded-full cursor-pointer text-primary-content flex items-center gap-1 transition-all duration-300"
+            >
+              <MdAttachMoney />
+
+              {loading && (
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              )}
+
+              {showBalance && !loading && <p className="text-xs">{formatCurrency(12500)}</p>}
             </button>
           </div>
+        </div>
+
+        {/* FILTERS */}
+        <div className="px-6 pb-4 flex items-center gap-3 mt-3">
+          <select className="border border-gray-300/60 rounded-xl px-4 py-2.5 text-sm bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+            <option>October 2025</option>
+            <option>September 2025</option>
+            <option>August 2025</option>
+          </select>
+          <button className="bg-linear-to-r from-primary to-primary-focus text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-primary/25 transform hover:scale-105 transition-all">
+            Apply Filter
+          </button>
         </div>
 
         {/* TABS & CONTENT */}
         <div className="flex-1 p-6 overflow-auto">
           {/* Modern Tab Bar */}
-          <div className="flex space-x-1 bg-gray-100/60 rounded-2xl p-1.5 w-fit mb-8">
+          <div className="flex space-x-1 bg-secondary/5 rounded-2xl p-1.5 w-full mb-8">
             {[
-              { key: "expense", label: "Expenses", icon: "📤" },
-              { key: "deposit", label: "Deposits", icon: "📥" },
-              { key: "overview", label: "Overview", icon: "📊" },
-            ].map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() =>
-                  setActiveTab(tab.key as "expense" | "deposit" | "overview")
-                }
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  activeTab === tab.key
-                    ? "bg-white shadow-lg text-primary-focus"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <span>{tab.icon}</span>
-                {tab.label}
-              </button>
-            ))}
+              { key: "expense", label: "Expenses", icon: GiPayMoney },
+              { key: "deposit", label: "Deposits", icon: GiReceiveMoney },
+              { key: "overview", label: "Overview", icon: GiTakeMyMoney },
+            ].map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() =>
+                    setActiveTab(tab.key as "expense" | "deposit" | "overview")
+                  }
+                  className={`cursor-pointer flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    activeTab === tab.key
+                      ? "bg-white text-primary-focus"
+                      : "text-gray-600 hover:text-gray-800"
+                  }`}
+                >
+                  <span><Icon size={22} /></span>
+                  {tab.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* TAB CONTENT */}
