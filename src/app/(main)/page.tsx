@@ -447,12 +447,14 @@ const FamilyDashboard: React.FC = () => {
                       <div className="flex gap-3">
                         {dummyFamilies.map((fam) => (
                           <div key={fam.family_name} className="text-center">
-                            <img
+                            <Image
+                              width={40}
+                              height={40}
                               src={fam.image}
                               alt={fam.family_name}
                               className="w-10 h-10 rounded-xl object-cover mx-auto mb-1"
                             />
-                            <p className="text-xs text-gray-600 truncate max-w-[80px]">
+                            <p className="text-xs text-gray-600 truncate max-w-20">
                               {fam.lastupdate.user_name.split(" ")[0]}
                             </p>
                           </div>
