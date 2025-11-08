@@ -131,9 +131,9 @@ const FamilyDetails: React.FC = () => {
       </div>
 
       {/* TABS & CONTENT */}
-      <div className="flex-1 p-6 overflow-auto">
+      <div className="flex-1 p-6">
         {/* Modern Tab Bar */}
-        <div className="flex space-x-1 bg-secondary/5 rounded-2xl p-1.5 w-full mb-8">
+        <div className="flex space-x-1 bg-secondary/5 rounded-2xl p-1.5 w-full mb-8 overflow-auto">
           {[
             { key: "expense", label: "Expenses", icon: GiPayMoney },
             { key: "deposit", label: "Deposits", icon: GiReceiveMoney },

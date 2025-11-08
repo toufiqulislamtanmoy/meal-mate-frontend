@@ -5,7 +5,7 @@ const FamilyMealDetails = async ({
 }: {
   params: Promise<{ family_id: string }>;
 }) => {
-  const { family_id } = await params;
+  // const { family_id } = await params;
 
   return (
     <>
