@@ -3,11 +3,11 @@ import { Users2, MousePointerClick, ArrowRight } from "lucide-react";
 
 const MainPage = () => {
   return (
-    <div>
-      <div className="lg:hidden block">
+    <div className="h-full w-full">
+      <div className="lg:hidden flex w-full h-full">
         <FamilyListSidebar />
       </div>
-      <div className="h-full w-full flex flex-col items-center justify-center text-center bg-background px-6">
+      <div className="h-full w-full lg:flex hidden flex-col items-center justify-center text-center bg-background px-6">
         <div className="flex flex-col items-center justify-center max-w-md">
           <div className="relative mb-6">
             <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-primary text-primary-content shadow-md">
