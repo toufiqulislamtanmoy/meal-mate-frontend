@@ -2,14 +2,43 @@
 import { Deposit, Expense } from "@/types/family";
 import Image from "next/image";
 import { useState } from "react";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineCalendar, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { GiPayMoney, GiReceiveMoney, GiTakeMyMoney } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
+import { CustomSelect } from "../Inputs/CustomSelect";
 
+const months = [
+  { label: "January", value: "01", icon: <AiOutlineCalendar size={18} /> },
+  { label: "February", value: "02", icon: <AiOutlineCalendar size={18} /> },
+  { label: "March", value: "03", icon: <AiOutlineCalendar size={18} /> },
+  { label: "April", value: "04", icon: <AiOutlineCalendar size={18} /> },
+  { label: "May", value: "05", icon: <AiOutlineCalendar size={18} /> },
+  { label: "June", value: "06", icon: <AiOutlineCalendar size={18} /> },
+  { label: "July", value: "07", icon: <AiOutlineCalendar size={18} /> },
+  { label: "August", value: "08", icon: <AiOutlineCalendar size={18} /> },
+  { label: "September", value: "09", icon: <AiOutlineCalendar size={18} /> },
+  { label: "October", value: "10", icon: <AiOutlineCalendar size={18} /> },
+  { label: "November", value: "11", icon: <AiOutlineCalendar size={18} /> },
+  { label: "December", value: "12", icon: <AiOutlineCalendar size={18} /> },
+];
+
+const generateYearOptions = (minYear: number, maxYear: number) => {
+  const options = [];
+  for (let year = minYear; year <= maxYear; year++) {
+    options.push({
+      label: year.toString(),
+      value: year.toString(),
+      icon: <AiOutlineCalendar size={18} />,
+    });
+  }
+  return options;
+};
 // MAIN COMPONENT
 const FamilyDetails: React.FC = () => {
   const [showBalance, setShowBalance] = useState(false);
   const [loading, setIsLoading] = useState(false);
+  const [selectMonth, setSelectMonth] = useState("01");
+  const [selectYear, setSelectYear] = useState("2025");
 
   const [activeTab, setActiveTab] = useState<
     "expense" | "deposit" | "overview"
@@ -119,13 +148,23 @@ const FamilyDetails: React.FC = () => {
       </div>
 
       {/* FILTERS */}
-      <div className="px-6 pb-4 flex items-center gap-3 mt-3">
-        <select className="border border-gray-300/60 rounded-xl px-4 py-2.5 text-sm bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-          <option>October 2025</option>
-          <option>September 2025</option>
-          <option>August 2025</option>
-        </select>
-        <button className="bg-linear-to-r from-primary to-primary-focus text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-primary/25 transform hover:scale-105 transition-all">
+      <div className="px-6 pb-4 flex lg:flex-row items-center gap-3 mt-3 flex-col">
+        <CustomSelect
+          options={months}
+          placeholder="Select a Family"
+          value={selectMonth}
+          onChange={setSelectMonth}
+          width="w-full"
+        />
+        <CustomSelect
+          options={generateYearOptions(2020, 2025)}
+          placeholder="Select a Year"
+          value={selectYear}
+          onChange={setSelectYear}
+          width="w-full"
+        />
+
+        <button className="bg-linear-to-r from-primary to-primary-focus text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:shadow-primary/25 transform hover:scale-105 transition-all w-full cursor-pointer">
           Apply Filter
         </button>
       </div>
@@ -170,7 +209,7 @@ const FamilyDetails: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-800">
                   Recent Expenses
                 </h3>
-                <button className="bg-linear-to-r from-red-500 to-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-red-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
+                <button className="bg-linear-to-r from-red-500 to-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-red-500/25 transform hover:scale-105 transition-all flex items-center gap-2 cursor-pointer">
                   <span>+</span>
                   Add Expense
                 </button>
@@ -221,7 +260,7 @@ const FamilyDetails: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-800">
                   Recent Deposits
                 </h3>
-                <button className="bg-linear-to-r from-green-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-green-500/25 transform hover:scale-105 transition-all flex items-center gap-2">
+                <button className="bg-linear-to-r from-green-500 to-green-600 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-green-500/25 transform hover:scale-105 transition-all flex items-center gap-2 cursor-pointer">
                   <span>+</span>
                   Add Deposit
                 </button>
