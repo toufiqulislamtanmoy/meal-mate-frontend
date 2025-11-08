@@ -37,10 +37,10 @@ const FamilyListSidebar = () => {
           href="/"
           className="flex items-center gap-2 group mt-3 "
         >
-          <div className="w-8 h-8 bg-linear-to-r from-purple-600 to-indigo-600 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-linear-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">🍽</span>
           </div>
-          <span className="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition">
+          <span className="text-xl font-bold text-gray-900 group-hover:text-primary transition">
             Family Meal
           </span>
         </Link>
